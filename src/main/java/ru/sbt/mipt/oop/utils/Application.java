@@ -1,25 +1,17 @@
 package ru.sbt.mipt.oop.utils;
 
-import com.coolcompany.smarthome.events.SensorEventsManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import ru.sbt.mipt.oop.adapters.HomeEventObserverAdapter;
 import ru.sbt.mipt.oop.components.SmartHome;
-import ru.sbt.mipt.oop.components.componentsforalarm.Alarm;
-import ru.sbt.mipt.oop.eventprocessors.*;
 import ru.sbt.mipt.oop.observer.HomeEventObserver;
 import ru.sbt.mipt.oop.observer.OurHomeEventObserver;
-import ru.sbt.mipt.oop.remotecontrol.MapRemoteControl;
-import ru.sbt.mipt.oop.sensoreventproviders.RandomSensorEventProvider;
-import ru.sbt.mipt.oop.smarthomeloaders.FileSmartHomeLoader;
 import ru.sbt.mipt.oop.smarthomeloaders.SmartHomeLoader;
 
 import java.io.IOException;
 
 public class Application {
 
-    @Autowired
+    //@Autowired
     private static SmartHomeLoader smartHomeLoader;
 
 
@@ -34,13 +26,11 @@ public class Application {
 
     public static void main(String[] args) throws IOException {
 
-
-
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.register(SmartHomeConfig.class);
         context.refresh();
 
-        //smartHomeLoader = context.getBean(SmartHomeLoader.class);
+        smartHomeLoader = context.getBean(SmartHomeLoader.class);
 
         smartHome = smartHomeLoader.loadSmartHome();
 

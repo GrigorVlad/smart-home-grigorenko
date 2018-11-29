@@ -2,19 +2,15 @@ package testremotecontrol;
 
 import org.junit.Before;
 import org.junit.Test;
-import ru.sbt.mipt.oop.components.Door;
 import ru.sbt.mipt.oop.components.Light;
 import ru.sbt.mipt.oop.components.Room;
 import ru.sbt.mipt.oop.components.SmartHome;
 import ru.sbt.mipt.oop.eventprocessors.EventProcessor;
-import ru.sbt.mipt.oop.eventprocessors.RemoteControlSensorEvent;
-import ru.sbt.mipt.oop.eventprocessors.SensorEvent;
 import ru.sbt.mipt.oop.remotecontrol.MapRemoteControl;
 import ru.sbt.mipt.oop.remotecontrol.RemoteControl;
 import ru.sbt.mipt.oop.remotecontrol.RemoteControlRegistry;
 import ru.sbt.mipt.oop.remotecontrol.ordinarycommands.CancelCommand;
 import ru.sbt.mipt.oop.remotecontrol.ordinarycommands.TurnOffAllLightCommand;
-import ru.sbt.mipt.oop.remotecontrol.ordinarycommands.TurnOnAllLightCommand;
 import ru.sbt.mipt.oop.smarthomeloaders.FileSmartHomeLoader;
 import ru.sbt.mipt.oop.smarthomeloaders.SmartHomeLoader;
 

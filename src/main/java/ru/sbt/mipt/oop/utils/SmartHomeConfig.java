@@ -1,6 +1,5 @@
 package ru.sbt.mipt.oop.utils;
 
-import com.coolcompany.smarthome.events.SensorEventsManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

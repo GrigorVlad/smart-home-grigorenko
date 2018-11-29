@@ -3,12 +3,10 @@ package testeventobservers;
 import org.junit.Before;
 import org.junit.Test;
 import ru.sbt.mipt.oop.components.Door;
-import ru.sbt.mipt.oop.components.Light;
 import ru.sbt.mipt.oop.components.Room;
 import ru.sbt.mipt.oop.components.SmartHome;
 import ru.sbt.mipt.oop.eventprocessors.*;
 import ru.sbt.mipt.oop.observer.HomeEventObserver;
-import ru.sbt.mipt.oop.observer.OurHomeEventObserver;
 import ru.sbt.mipt.oop.smarthomeloaders.FileSmartHomeLoader;
 import ru.sbt.mipt.oop.smarthomeloaders.SmartHomeLoader;
 
