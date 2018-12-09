@@ -43,7 +43,6 @@ public class HallDoorEventProcessorTest {
                 for (Door door : room.getDoors()) {
                     assertFalse(door.isOpen());
                 }
-
             }
 
             for (Light light : room.getLights()) {
