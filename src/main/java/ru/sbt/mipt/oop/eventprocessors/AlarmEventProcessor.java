@@ -20,8 +20,9 @@ public class AlarmEventProcessor implements EventProcessor {
         int inputPassword;
 
         try {
-            FileInputStream fileInputStream = new FileInputStream("D:\\студентФИВТ\\Курсы СберТех\\ДизайнООП\\smart-home-2018-master\\src\\main\\resources\\input_password.txt");
-            BufferedReader reader = new BufferedReader(new InputStreamReader(fileInputStream));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            //BufferedReader reader = new BufferedReader(new FileReader(new File("D:\\студентФИВТ\\Курсы СберТех\\ДизайнООП\\smart-home-2018-master\\src\\main\\resources\\input_password.txt")));
+            System.out.print("Введите пароль: ");
             inputPassword = Integer.parseInt(reader.readLine());
         } catch (IOException e) {
             inputPassword = 0;

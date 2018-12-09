@@ -2,9 +2,11 @@ package ru.sbt.mipt.oop.components;
 
 //import com.sun.javafx.scene.control.skin.VirtualFlow;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import ru.sbt.mipt.oop.components.componentsforalarm.Alarm;
 import ru.sbt.mipt.oop.eventprocessors.Action;
 import ru.sbt.mipt.oop.remotecontrol.RemoteControlRegistry;
+import ru.sbt.mipt.oop.smarthomeloaders.SmartHomeLoader;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -13,7 +15,10 @@ import java.util.Collection;
 public class SmartHome implements Actionable, Printable {
 
     private RemoteControlRegistry mapRC;
+
+    @Autowired
     private Alarm alarm;
+
     private Collection<Room> rooms;
 
     public SmartHome() {
@@ -28,8 +33,6 @@ public class SmartHome implements Actionable, Printable {
         this.rooms = rooms;
         this.alarm = alarm;
     }
-
-
 
     public void addRoom(Room room) {
         rooms.add(room);
@@ -60,7 +63,7 @@ public class SmartHome implements Actionable, Printable {
     public void turnOffLights() {
         for (Room room : rooms) {
             for (Light light : room.getLights()) {
-                light.setState(false);
+                light.setOn(false);
             }
         }
     }
@@ -92,7 +95,7 @@ public class SmartHome implements Actionable, Printable {
     public void alarmAlert() {
         for (Room room : rooms) {
             for (Door door : room.getDoors()) {
-                door.setState(false);
+                door.setOpen(false);
             }
         }
     }

@@ -33,23 +33,52 @@ public class AlarmEventProcessorTest {
         eventProcessor2 = new EventProcessorWithAlarm(new LightEventProcessor());
         smartHome = smartHomeLoader.loadSmartHome();
         smartHome.setAlarm(new Alarm("alarm", 12345));
+
         event1 = new SensorEvent(SensorEventType.ALARM_ACTIVATE, "alarm");
         event2 = new SensorEvent(SensorEventType.LIGHT_ON, "1");
+
     }
 
     @Test
     public void testEvent() {
-        eventProcessor1.processEvent(smartHome, event1);
-        eventProcessor2.processEvent(smartHome, event2);
 
         Alarm alarm = smartHome.getAlarm();
+
+        eventProcessor1.processEvent(smartHome, event1);
+
+        assertTrue(alarm.isActivated());
+
+        eventProcessor2.processEvent(smartHome, event2);
+
         assertTrue(alarm.isAlert());
 
         for (Room room: smartHome.getRooms()) {
             for (Door door : room.getDoors()) {
-                assertFalse(door.isState());
+                assertFalse(door.isOpen());
             }
         }
+
+    }
+
+    @Test
+    public void testEventWrong() {
+        Alarm alarm = smartHome.getAlarm();
+
+        eventProcessor1.processEvent(smartHome, event1);
+
+        assertTrue(alarm.isAlert());
+
+    }
+
+    @Test
+    public void testEventDisable() {
+        Alarm alarm = smartHome.getAlarm();
+
+        eventProcessor1.processEvent(smartHome, new SensorEvent(SensorEventType.ALARM_ACTIVATE, "alarm"));
+        assertTrue(alarm.isActivated());
+        eventProcessor1.processEvent(smartHome, new SensorEvent(SensorEventType.ALARM_DEACTIVATE, "alarm"));
+        assertTrue(alarm.isDeactivated());
+
 
     }
 

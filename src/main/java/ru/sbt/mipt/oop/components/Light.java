@@ -1,18 +1,39 @@
 package ru.sbt.mipt.oop.components;
 
-public class Light extends Component {
+import ru.sbt.mipt.oop.eventprocessors.Action;
 
-    public Light(String idName, boolean isOn) {
-        super(idName);
-        this.setState(isOn);
+public class Light implements Actionable {
+
+    private boolean isOn;
+    private final String id;
+
+    public Light(String id, boolean isOn) {
+        this.id = id;
+        this.isOn = isOn;
     }
 
-    @Override
+    public boolean isOn() {
+        return isOn;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setOn(boolean on) {
+        isOn = on;
+    }
+
     public void print() {
-        if (this.isState()) {
+        if (this.isOn()) {
             System.out.println("Light " + this.getId() + " is on!");
         } else {
             System.out.println("Light " + this.getId() + " is off!");
         }
+    }
+
+    @Override
+    public void executeAction(Action action) {
+        action.execute(this);
     }
 }

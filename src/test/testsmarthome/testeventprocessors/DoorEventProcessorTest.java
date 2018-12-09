@@ -2,6 +2,7 @@ package testeventprocessors;
 
 import org.junit.Before;
 import org.junit.Test;
+import ru.sbt.mipt.oop.components.Light;
 import ru.sbt.mipt.oop.eventprocessors.SensorEvent;
 import ru.sbt.mipt.oop.eventprocessors.SensorEventType;
 import ru.sbt.mipt.oop.components.Door;
@@ -14,7 +15,7 @@ import ru.sbt.mipt.oop.smarthomeloaders.SmartHomeLoader;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class DoorEventProcessorTest {
 
@@ -33,17 +34,34 @@ public class DoorEventProcessorTest {
     }
 
     @Test
-    public void testEvent() {
+    public void testEvent1() {
         doorEventProcessor.processEvent(smartHome, event);
 
         for (Room room : smartHome.getRooms()) {
             for (Door door : room.getDoors()) {
                 if (door.getId().equals("1")) {
-                    assertEquals(false, door.isState());
+                    assertFalse(door.isOpen());
                 }
             }
         }
     }
+
+    @Test
+    public void testEvent2() {
+        event = new SensorEvent(SensorEventType.DOOR_LOCKED, "3");
+        doorEventProcessor.processEvent(smartHome, event);
+
+        for (Room room : smartHome.getRooms()) {
+            for (Door door : room.getDoors()) {
+                if (door.getId().equals("3")) {
+                    assertFalse(door.isOpen());
+                    assertTrue(door.isLocked());
+                }
+            }
+        }
+    }
+
+
 
 
 }

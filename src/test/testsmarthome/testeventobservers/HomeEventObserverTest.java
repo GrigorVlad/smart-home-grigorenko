@@ -2,9 +2,8 @@ package testeventobservers;
 
 import org.junit.Before;
 import org.junit.Test;
-import ru.sbt.mipt.oop.components.Door;
-import ru.sbt.mipt.oop.components.Room;
 import ru.sbt.mipt.oop.components.SmartHome;
+import ru.sbt.mipt.oop.components.componentsforalarm.Alarm;
 import ru.sbt.mipt.oop.eventprocessors.*;
 import ru.sbt.mipt.oop.observer.HomeEventObserver;
 import ru.sbt.mipt.oop.smarthomeloaders.FileSmartHomeLoader;
@@ -25,6 +24,7 @@ public class HomeEventObserverTest {
     public void init() throws IOException {
         smartHomeLoader = new FileSmartHomeLoader();
         smartHome = smartHomeLoader.loadSmartHome();
+        smartHome.setAlarm(new Alarm("alarm", 12345));
         homeEventObserver = new HomeEventObserverForTest(new SensorEventProviderForTest());
 
         homeEventObserver.registerEventProcessor(new AlarmEventProcessor());
@@ -38,14 +38,17 @@ public class HomeEventObserverTest {
 
         homeEventObserver.runEventCycle(smartHome);
 
-        for (Room room : smartHome.getRooms()) {
-            for (Door door : room.getDoors()) {
-                if (door.getId().equals("3")) {
-                    assertTrue(door.isLocked());
-                    assertFalse(door.isState());
-                }
-            }
-        }
+//        for (Room room : smartHome.getRooms()) {
+//
+//            for (Door door : room.getDoors()) {
+//                if (door.getId().equals("4")) {
+//                    assertTrue(door.isOpen());
+//                }
+//            }
+//
+//        }
+
+        assertTrue(smartHome.getAlarm().isActivated());
 
     }
 }

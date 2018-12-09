@@ -2,9 +2,9 @@ package ru.sbt.mipt.oop.components.componentsforalarm;
 
 public class DeactivateAlarmState implements AlarmState {
 
-    Alarm alarm;
+    private Alarm alarm;
 
-    public DeactivateAlarmState(Alarm alarm) {
+    DeactivateAlarmState(Alarm alarm) {
         this.alarm = alarm;
     }
 
@@ -12,9 +12,9 @@ public class DeactivateAlarmState implements AlarmState {
     public void activate(int inputPassword) {
 
         if (inputPassword == alarm.getPassword()) {
-            alarm.setAlarmState(alarm.getActivateAlarmState());
+            alarm.setAlarmState(new ActivateAlarmState(alarm));
         } else {
-            alarm.setAlarmState(alarm.getAlertAlarmState());
+            alarm.setAlarmState(new AlertAlarmState(alarm));
         }
 
     }

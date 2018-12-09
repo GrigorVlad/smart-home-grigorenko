@@ -2,10 +2,6 @@ package ru.sbt.mipt.oop.components.componentsforalarm;
 
 public class Alarm{
 
-    private AlarmState activateAlarmState;
-    private AlarmState deactivateAlarmState;
-    private AlarmState alertAlarmState;
-
     private AlarmState alarmState;
 
     private final int password;
@@ -15,11 +11,7 @@ public class Alarm{
         this.id = id;
         this.password = password;
 
-        activateAlarmState = new ActivateAlarmState(this);
-        deactivateAlarmState = new DeactivateAlarmState(this);
-        alertAlarmState = new AlertAlarmState(this);
-
-        this.alarmState = deactivateAlarmState;
+        this.alarmState = new DeactivateAlarmState(this);
     }
 
 
@@ -36,7 +28,7 @@ public class Alarm{
     }
 
     public void alert () {
-        setAlarmState(alertAlarmState);
+        setAlarmState(new AlertAlarmState(this));
     }
 
     public AlarmState getAlarmState() {
@@ -53,20 +45,6 @@ public class Alarm{
 
     public void print() {
         alarmState.print();
-    }
-
-
-
-    public AlarmState getActivateAlarmState() {
-        return activateAlarmState;
-    }
-
-    public AlarmState getDeactivateAlarmState() {
-        return deactivateAlarmState;
-    }
-
-    public AlarmState getAlertAlarmState() {
-        return alertAlarmState;
     }
 
 

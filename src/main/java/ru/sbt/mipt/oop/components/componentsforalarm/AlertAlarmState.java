@@ -2,9 +2,9 @@ package ru.sbt.mipt.oop.components.componentsforalarm;
 
 public class AlertAlarmState implements AlarmState {
 
-    Alarm alarm;
+    private Alarm alarm;
 
-    public AlertAlarmState(Alarm alarm) {
+    AlertAlarmState(Alarm alarm) {
         this.alarm = alarm;
     }
 

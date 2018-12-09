@@ -21,9 +21,9 @@ public class LightEventProcessor implements EventProcessor {
 
     private void changeLightState(Light light, SensorEvent event) {
         if (event.getType() == SensorEventType.LIGHT_ON) {
-            light.setState(true);
+            light.setOn(true);
         } else {
-            light.setState(false);
+            light.setOn(false);
         }
         light.print();
     }

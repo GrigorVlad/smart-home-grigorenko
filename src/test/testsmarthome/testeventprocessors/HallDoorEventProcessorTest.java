@@ -16,6 +16,7 @@ import ru.sbt.mipt.oop.smarthomeloaders.SmartHomeLoader;
 import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class HallDoorEventProcessorTest {
 
@@ -40,13 +41,13 @@ public class HallDoorEventProcessorTest {
         for (Room room : smartHome.getRooms()) {
             if (room.getName().equals("hall")) {
                 for (Door door : room.getDoors()) {
-                    assertEquals(false, door.isState());
+                    assertFalse(door.isOpen());
                 }
 
             }
 
             for (Light light : room.getLights()) {
-                assertEquals(false, light.isState());
+                assertFalse(light.isOn());
             }
         }
     }

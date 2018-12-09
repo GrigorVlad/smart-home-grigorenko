@@ -15,6 +15,7 @@ import ru.sbt.mipt.oop.smarthomeloaders.SmartHomeLoader;
 import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class LightEventProcessorTest {
 
@@ -39,7 +40,7 @@ public class LightEventProcessorTest {
         for (Room room : smartHome.getRooms()) {
             for (Light light : room.getLights()) {
                 if (light.getId().equals("1")) {
-                    assertEquals(true, light.isState());
+                    assertTrue(light.isOn());
                 }
             }
         }

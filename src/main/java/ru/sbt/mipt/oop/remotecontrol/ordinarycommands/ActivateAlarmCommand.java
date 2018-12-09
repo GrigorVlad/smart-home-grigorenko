@@ -2,23 +2,29 @@ package ru.sbt.mipt.oop.remotecontrol.ordinarycommands;
 
 import ru.sbt.mipt.oop.components.SmartHome;
 
+import java.io.*;
+
 public class ActivateAlarmCommand implements Command{
 
-    int password;
-    SmartHome smartHome;
+    private SmartHome smartHome;
 
-    public ActivateAlarmCommand(SmartHome smartHome, int password) {
+    public ActivateAlarmCommand(SmartHome smartHome) {
         this.smartHome = smartHome;
-        this.password = password;
-    }
-
-    @Override
-    public void undoCommand() {
-        System.out.println("Operation of alarm activation can't be canceled");
     }
 
     @Override
     public void doCommand() {
+        System.out.println("Введите пароль: ");
+        //BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int password = 0;
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(new File("D:\\студентФИВТ\\Курсы СберТех\\ДизайнООП\\smart-home-2018-master\\src\\main\\resources\\input_password.txt")));
+            password = Integer.parseInt(reader.readLine());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         smartHome.getAlarm().activate(password);
     }
 

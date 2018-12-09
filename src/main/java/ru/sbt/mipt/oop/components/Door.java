@@ -2,7 +2,27 @@ package ru.sbt.mipt.oop.components;
 
 import ru.sbt.mipt.oop.eventprocessors.Action;
 
-public class Door extends Component{
+public class Door implements Actionable {
+
+    private final String id;
+    private boolean isOpen;
+
+    public Door(boolean isOpen, String id) {
+        this.isOpen = isOpen;
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setOpen(boolean open) {
+        isOpen = open;
+    }
+
+    public boolean isOpen() {
+        return isOpen;
+    }
 
     private boolean locked;
 
@@ -14,17 +34,11 @@ public class Door extends Component{
         this.locked = locked;
     }
 
-    public Door(String idName, boolean isOpen) {
-        super(idName);
-        this.setState(isOpen);
-        this.setLocked(false);
-    }
 
-    @Override
     public void print() {
         System.out.print("Door " + this.getId() + " ");
 
-        if (this.isState()) {
+        if (this.isOpen()) {
             System.out.print("is open and ");
         } else {
             System.out.print("is close and ");
@@ -36,5 +50,10 @@ public class Door extends Component{
             System.out.println("not locked!");
         }
 
+    }
+
+    @Override
+    public void executeAction(Action action) {
+        action.execute(this);
     }
 }

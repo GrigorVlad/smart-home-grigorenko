@@ -20,14 +20,14 @@ public class DoorEventProcessor implements EventProcessor {
     private void changeDoorState(Door door, SensorEvent event) {
 
         if (event.getType() == SensorEventType.DOOR_LOCKED) {
-            door.setState(false);
+            door.setOpen(false);
             door.setLocked(true);
         } else if (event.getType() == SensorEventType.DOOR_UNLOCKED) {
             door.setLocked(false);
         } else if (event.getType() == SensorEventType.DOOR_CLOSED) {
-            door.setState(false);
+            door.setOpen(false);
         } else {
-            door.setState(true);
+            door.setOpen(true);
         }
         door.print();
     }
