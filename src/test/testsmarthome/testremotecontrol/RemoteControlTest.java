@@ -41,7 +41,7 @@ public class RemoteControlTest {
         rc.setCommandOnSlot("C", new CloseHallDoorCommand(smartHome));
         rc.setCommandOnSlot("D", new SetAlarmAlertCommand(smartHome));
         rc.setCommandOnSlot("1", new TurnOnLightInHallCommand(smartHome));
-        rc.setCommandOnSlot("2", new ActivateAlarmCommand(smartHome));
+        //rc.setCommandOnSlot("2", new ActivateAlarmCommand(smartHome));
     }
 
     @Test
@@ -50,7 +50,6 @@ public class RemoteControlTest {
         Alarm alarm = smartHome.getAlarm();
 
         rc.pressedOnButton("B");
-
         for (Room room : smartHome.getRooms()) {
             for (Light light : room.getLights()) {
                 assertFalse(light.isOn());
@@ -58,7 +57,6 @@ public class RemoteControlTest {
         }
 
         rc.pressedOnButton("A");
-
         for (Room room : smartHome.getRooms()) {
             for (Light light : room.getLights()) {
                 assertTrue(light.isOn());
@@ -66,7 +64,6 @@ public class RemoteControlTest {
         }
 
         rc.pressedOnButton("C");
-
         for (Room room : smartHome.getRooms()) {
             for (Light light : room.getLights()) {
                 assertFalse(light.isOn());
@@ -79,7 +76,6 @@ public class RemoteControlTest {
         }
 
         rc.pressedOnButton("1");
-
         for (Room room : smartHome.getRooms()) {
             if (room.getName().equals("hall")) {
                 for (Light light : room.getLights()) {
@@ -87,15 +83,23 @@ public class RemoteControlTest {
                 }
             }
         }
-
-//        rc.pressedOnButton("D");
-//
-//        assertTrue(alarm.isAlert());
-
-        rc.pressedOnButton("2");
-
-        assertTrue(alarm.isActivated());
-
     }
+
+    @Test
+    public void testActivateAlarmWithCorrectPassword() {
+        Alarm alarm = smartHome.getAlarm();
+        rc.setCommandOnSlot("2", new ActivateAlarmCommand(smartHome, 12345));
+        rc.pressedOnButton("2");
+        assertTrue(alarm.isActivated());
+    }
+
+    @Test
+    public void testActivateAlarmWithIncorrectPassword() {
+        Alarm alarm = smartHome.getAlarm();
+        rc.setCommandOnSlot("2", new ActivateAlarmCommand(smartHome, 123));
+        rc.pressedOnButton("2");
+        assertTrue(alarm.isAlert());
+    }
+
 
 }

@@ -11,30 +11,19 @@ public class AlarmEventProcessor implements EventProcessor {
     public void processEvent(SmartHome smartHome, SensorEvent event) {
         if (!isAlarmEvent(event)) return;
 
-        changeAlarmState(smartHome.getAlarm(), event);
+        changeAlarmState(smartHome.getAlarm(), (SensorEventForAlarm) event);
 
     }
 
-    private void changeAlarmState(Alarm alarm, SensorEvent event) {
-
-        int inputPassword;
-
-        try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            //BufferedReader reader = new BufferedReader(new FileReader(new File("D:\\студентФИВТ\\Курсы СберТех\\ДизайнООП\\smart-home-2018-master\\src\\main\\resources\\input_password.txt")));
-            System.out.print("Введите пароль: ");
-            inputPassword = Integer.parseInt(reader.readLine());
-        } catch (IOException e) {
-            inputPassword = 0;
-        }
+    private void changeAlarmState(Alarm alarm, SensorEventForAlarm event) {
 
         switch (event.getType()) {
             case ALARM_ACTIVATE:
-                alarm.activate(inputPassword);
+                alarm.activate(event.getPassword());
                 break;
 
             case ALARM_DEACTIVATE:
-                alarm.deactivate(inputPassword);
+                alarm.deactivate(event.getPassword());
                 break;
 
         }

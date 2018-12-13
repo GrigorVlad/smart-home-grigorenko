@@ -19,9 +19,7 @@ public class Application {
         context.register(SmartHomeConfig.class);
         context.refresh();
 
-        //smartHomeLoader = context.getBean(SmartHomeLoader.class);
         smartHome = context.getBean(SmartHome.class);
-
 
         HomeEventObserver homeEventObserver = context.getBean(HomeEventObserver.class);
         homeEventObserver.runEventCycle(smartHome);

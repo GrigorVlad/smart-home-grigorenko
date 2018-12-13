@@ -7,23 +7,17 @@ import java.io.*;
 public class ActivateAlarmCommand implements Command{
 
     private SmartHome smartHome;
+    private int password;
 
-    public ActivateAlarmCommand(SmartHome smartHome) {
+    public ActivateAlarmCommand(SmartHome smartHome, int password) {
         this.smartHome = smartHome;
+        this.password = password;
     }
 
     @Override
     public void doCommand() {
-        System.out.println("Введите пароль: ");
-        //BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        int password = 0;
 
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(new File("D:\\студентФИВТ\\Курсы СберТех\\ДизайнООП\\smart-home-2018-master\\src\\main\\resources\\input_password.txt")));
-            password = Integer.parseInt(reader.readLine());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
 
         smartHome.getAlarm().activate(password);
     }
